@@ -4,6 +4,7 @@
  */
 package com.github.stuxuhai.jcron;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.joda.time.DateTime;
@@ -13,7 +14,7 @@ import com.google.common.collect.Range;
 
 public class LastWeekdayOfMonthPaser extends AbstractPaser {
 
-    private Set<Integer> set;
+    private Set<Integer> set = new HashSet<Integer>();
 
     protected LastWeekdayOfMonthPaser(Range<Integer> range, DurationField type) {
         super(range, type);
