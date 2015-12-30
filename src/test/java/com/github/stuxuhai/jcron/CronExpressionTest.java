@@ -1,6 +1,6 @@
 /*
- * Author: wuya
- * Create Date: 2015-01-14 23:06:53
+ * Author: Jayer
+ * Create Date: 2015-01-13 13:24:45
  */
 package com.github.stuxuhai.jcron;
 
