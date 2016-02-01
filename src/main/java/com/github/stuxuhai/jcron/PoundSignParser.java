@@ -12,13 +12,13 @@ import org.joda.time.MutableDateTime;
 
 import com.google.common.collect.Range;
 
-public class PoundSignPaser extends AbstractPaser {
+public class PoundSignParser extends AbstractParser {
 
     private Set<Integer> set;
     private Range<Integer> range;
     private DurationField type;
 
-    protected PoundSignPaser(Range<Integer> range, DurationField type) {
+    protected PoundSignParser(Range<Integer> range, DurationField type) {
         super(range, type);
         this.range = range;
         this.type = type;

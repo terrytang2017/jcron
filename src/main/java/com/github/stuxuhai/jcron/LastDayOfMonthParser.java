@@ -15,7 +15,7 @@ import org.joda.time.MutableDateTime;
 
 import com.google.common.collect.Range;
 
-public class LastDayOfMonthPaser extends AbstractPaser {
+public class LastDayOfMonthParser extends AbstractParser {
 
     private Set<Integer> set;
     private Set<Integer> result;
@@ -23,7 +23,7 @@ public class LastDayOfMonthPaser extends AbstractPaser {
     private DurationField type;
     private static final Pattern LAST_DAY_OF_MONTH_PATTERN = Pattern.compile("(\\d+)?L");
 
-    protected LastDayOfMonthPaser(Range<Integer> range, DurationField type) {
+    protected LastDayOfMonthParser(Range<Integer> range, DurationField type) {
         super(range, type);
         this.range = range;
         this.type = type;

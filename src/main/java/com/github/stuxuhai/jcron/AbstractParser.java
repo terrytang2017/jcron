@@ -11,7 +11,7 @@ import org.joda.time.DateTime;
 
 import com.google.common.collect.Range;
 
-public abstract class AbstractPaser {
+public abstract class AbstractParser {
 
     protected enum DurationField {
 
@@ -27,7 +27,7 @@ public abstract class AbstractPaser {
         }
     }
 
-    protected AbstractPaser(Range<Integer> range, DurationField type) {
+    protected AbstractParser(Range<Integer> range, DurationField type) {
     }
 
     abstract protected boolean matches(String cronFieldExp) throws ParseException;

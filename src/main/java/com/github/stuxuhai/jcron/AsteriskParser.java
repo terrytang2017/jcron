@@ -15,7 +15,7 @@ import org.joda.time.MutableDateTime;
 
 import com.google.common.collect.Range;
 
-public class AsteriskPaser extends AbstractPaser {
+public class AsteriskParser extends AbstractParser {
 
     private Set<int[]> set;
     private Set<Integer> resultSet;
@@ -23,7 +23,7 @@ public class AsteriskPaser extends AbstractPaser {
     private DurationField type;
     private static final Pattern ASTERISK_PATTERN = Pattern.compile("(\\d+)#(\\d+)");
 
-    protected AsteriskPaser(Range<Integer> range, DurationField type) {
+    protected AsteriskParser(Range<Integer> range, DurationField type) {
         super(range, type);
         this.range = range;
         this.type = type;

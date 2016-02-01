@@ -15,7 +15,7 @@ import org.joda.time.MutableDateTime;
 
 import com.google.common.collect.Range;
 
-public class NearestWeekdayOfMonthPaser extends AbstractPaser {
+public class NearestWeekdayOfMonthParser extends AbstractParser {
 
     private Set<Integer> set;
     private Set<Integer> resultSet;
@@ -23,7 +23,7 @@ public class NearestWeekdayOfMonthPaser extends AbstractPaser {
     private DurationField type;
     private static final Pattern NEAREST_WEEKDAY_OF_MONTH_PATTERN = Pattern.compile("(\\d+)W");
 
-    protected NearestWeekdayOfMonthPaser(Range<Integer> range, DurationField type) {
+    protected NearestWeekdayOfMonthParser(Range<Integer> range, DurationField type) {
         super(range, type);
         this.range = range;
         this.type = type;

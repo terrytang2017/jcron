@@ -12,11 +12,11 @@ import org.joda.time.MutableDateTime;
 
 import com.google.common.collect.Range;
 
-public class LastWeekdayOfMonthPaser extends AbstractPaser {
+public class LastWeekdayOfMonthParser extends AbstractParser {
 
     private Set<Integer> set = new HashSet<Integer>();
 
-    protected LastWeekdayOfMonthPaser(Range<Integer> range, DurationField type) {
+    protected LastWeekdayOfMonthParser(Range<Integer> range, DurationField type) {
         super(range, type);
     }
 

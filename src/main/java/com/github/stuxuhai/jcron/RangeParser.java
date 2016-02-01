@@ -7,21 +7,23 @@ package com.github.stuxuhai.jcron;
 import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.joda.time.DateTime;
 import org.joda.time.MutableDateTime;
 
-import com.google.common.base.CharMatcher;
 import com.google.common.collect.Range;
 
-public class SinglePaser extends AbstractPaser {
+public class RangeParser extends AbstractParser {
 
     private Set<Integer> set;
     private Set<Integer> result;
     private Range<Integer> range;
     private DurationField type;
+    private static final Pattern RANGE_PATTERN = Pattern.compile("(\\d+)-(\\d+)");
 
-    protected SinglePaser(Range<Integer> range, DurationField type) {
+    protected RangeParser(Range<Integer> range, DurationField type) {
         super(range, type);
         this.range = range;
         this.type = type;
@@ -29,13 +31,19 @@ public class SinglePaser extends AbstractPaser {
 
     @Override
     protected boolean matches(String cronFieldExp) throws ParseException {
-        if (CharMatcher.DIGIT.matchesAllOf(cronFieldExp)) {
-            int value = Integer.parseInt(cronFieldExp);
-            if (range.contains(value)) {
+        Matcher m = RANGE_PATTERN.matcher(cronFieldExp);
+        if (m.matches()) {
+            int from = Integer.parseInt(m.group(1));
+            int to = Integer.parseInt(m.group(2));
+            if (from <= to && range.contains(from) && range.contains(to)) {
                 if (set == null) {
                     set = new HashSet<Integer>();
                 }
-                set.add(value);
+
+                for (int i = from; i <= to; i++) {
+                    set.add(i);
+                }
+
                 return true;
             } else {
                 throw new ParseException(
@@ -71,4 +79,5 @@ public class SinglePaser extends AbstractPaser {
 
         return set;
     }
+
 }

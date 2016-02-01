@@ -15,15 +15,15 @@ import org.joda.time.MutableDateTime;
 
 import com.google.common.collect.Range;
 
-public class RangePaser extends AbstractPaser {
+public class StepParser extends AbstractParser {
 
     private Set<Integer> set;
     private Set<Integer> result;
     private Range<Integer> range;
     private DurationField type;
-    private static final Pattern RANGE_PATTERN = Pattern.compile("(\\d+)-(\\d+)");
+    private static final Pattern STEP_PATTERN = Pattern.compile("(\\d+|\\*)/(\\d+)");
 
-    protected RangePaser(Range<Integer> range, DurationField type) {
+    protected StepParser(Range<Integer> range, DurationField type) {
         super(range, type);
         this.range = range;
         this.type = type;
@@ -31,16 +31,16 @@ public class RangePaser extends AbstractPaser {
 
     @Override
     protected boolean matches(String cronFieldExp) throws ParseException {
-        Matcher m = RANGE_PATTERN.matcher(cronFieldExp);
+        Matcher m = STEP_PATTERN.matcher(cronFieldExp);
         if (m.matches()) {
-            int from = Integer.parseInt(m.group(1));
-            int to = Integer.parseInt(m.group(2));
-            if (from <= to && range.contains(from) && range.contains(to)) {
+            int start = m.group(1).equals("*") ? 0 : Integer.parseInt(m.group(1));
+            int step = Integer.parseInt(m.group(2));
+            if (step > 0 && range.contains(step) && range.contains(start)) {
                 if (set == null) {
                     set = new HashSet<Integer>();
                 }
 
-                for (int i = from; i <= to; i++) {
+                for (int i = start; range.contains(i); i += step) {
                     set.add(i);
                 }
 
@@ -56,7 +56,7 @@ public class RangePaser extends AbstractPaser {
 
     @Override
     protected Set<Integer> parse(DateTime dateTime) {
-        if (type.equals(DurationField.DAY_OF_WEEK)) {
+        if (type == DurationField.DAY_OF_WEEK) {
             if (set != null) {
                 if (result == null) {
                     result = new HashSet<Integer>();
