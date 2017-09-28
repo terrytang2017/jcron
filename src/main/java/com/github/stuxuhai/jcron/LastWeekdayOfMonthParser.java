@@ -1,32 +1,30 @@
-/*
- * Author: Jayer
- * Create Date: 2015-01-13 13:24:45
- */
 package com.github.stuxuhai.jcron;
+
+import com.google.common.collect.Range;
+import org.joda.time.DateTime;
+import org.joda.time.MutableDateTime;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import org.joda.time.DateTime;
-import org.joda.time.MutableDateTime;
-
-import com.google.common.collect.Range;
-
+/**
+ * @author Jayer
+ * @date 2017-03-31
+ */
 public class LastWeekdayOfMonthParser extends AbstractParser {
 
-    private Set<Integer> set = new HashSet<Integer>();
-
-    protected LastWeekdayOfMonthParser(Range<Integer> range, DurationField type) {
+    public LastWeekdayOfMonthParser(Range<Integer> range, DurationField type) {
         super(range, type);
     }
 
     @Override
-    protected boolean matches(String cronFieldExp) {
+    public boolean matches(String cronFieldExp) {
         return "LW".equals(cronFieldExp);
     }
 
     @Override
-    protected Set<Integer> parse(DateTime dateTime) {
+    public Set<Integer> parse(DateTime dateTime) {
+        Set<Integer> set = new HashSet<>();
         MutableDateTime mdt = dateTime.dayOfMonth().withMaximumValue().toMutableDateTime();
         while (mdt.getDayOfWeek() > 5) {
             mdt.addDays(-1);

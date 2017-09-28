@@ -1,22 +1,21 @@
-/*
- * Author: Jayer
- * Create Date: 2016-02-01 16:24:45
- */
 package com.github.stuxuhai.jcron;
+
+import com.google.common.collect.Range;
+import org.joda.time.DateTime;
+import org.joda.time.MutableDateTime;
 
 import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.joda.time.DateTime;
-import org.joda.time.MutableDateTime;
-
-import com.google.common.collect.Range;
-
+/**
+ * @author Jayer
+ * @date 2017-03-31
+ */
 public class WeekAbbreviationParser extends AbstractParser {
 
+    private static final String[] WEEK_ABBREVIATIONS = {"MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"};
     private int index = -1;
-    private static final String[] WEEK_ABBREVIATIONS = { "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN" };
 
     public WeekAbbreviationParser(Range<Integer> range, DurationField type) {
         super(range, type);
@@ -38,7 +37,7 @@ public class WeekAbbreviationParser extends AbstractParser {
 
     @Override
     public Set<Integer> parse(DateTime dateTime) {
-        Set<Integer> result = new HashSet<Integer>();
+        Set<Integer> result = new HashSet<>();
         if (index != -1) {
             MutableDateTime mdt = dateTime.dayOfMonth().withMaximumValue().toMutableDateTime();
             int maxDayOfMonth = mdt.getDayOfMonth();
